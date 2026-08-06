@@ -152,14 +152,7 @@ bridge shutdown (a clean stop, or the process dying and the MQTT broker
 firing its last-will) marks the device offline. If you'd rather see
 "unavailable" during outages instead of stale values, that's a one-line
 change in `_run_single_bridge`'s
-exception handler in `bms_cli/mqtt_bridge.py` -- ask and I can add it back
-as a flag.
-
-This intentionally keeps the BLE connection open across polls rather than
-reconnecting every cycle (unlike e.g. HA's `command_line` platform calling
-`bms-cli status` on a timer) -- reconnecting is the slowest and most
-failure-prone part of talking to these boards, so the bridge only does it
-once at startup and again if the link actually drops.
+exception handler in `bms_cli/mqtt_bridge.py`.
 
 ```
 pip install -e ".[mqtt]"   # pulls in paho-mqtt
@@ -219,10 +212,8 @@ WantedBy=multi-user.target
 with `/etc/bms-mqtt-bridge.env` containing `MQTT_PASSWORD=...` (root-readable
 only: `chmod 600`). Then `sudo systemctl enable --now bms-mqtt-bridge`.
 
-If you'd rather avoid a persistent daemon and don't mind HA reconnecting over
-BLE on every poll, a `command_line` sensor pointed at `bms-cli status --json`
-works too, but expect it to be slower and to hit the same connect flakiness
-more often since it reconnects every scan interval.
+If you'd rather avoid a persistent daemon, a `command_line` sensor pointed at `bms-cli status --json`
+works too.
 
 ## Caveats
 
