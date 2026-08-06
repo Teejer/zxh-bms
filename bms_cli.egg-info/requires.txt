@@ -1,0 +1,4 @@
+bleak>=0.21
+
+[mqtt]
+paho-mqtt<3,>=1.6

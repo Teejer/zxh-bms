@@ -1,0 +1,2 @@
+[console_scripts]
+bms-cli = bms_cli.cli:main
