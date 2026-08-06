@@ -1,5 +1,7 @@
 # bms-cli
 
+Written with the help of Qwen3.6 35b
+
 A Linux command-line tool for the family of Bluetooth LE "smart BMS" boards
 used in many rebranded LiFePO4 batteries. The protocol was reverse engineered
 from the vendor's Android app (`zxhbms`, a uni-app/DCloud hybrid app) by
